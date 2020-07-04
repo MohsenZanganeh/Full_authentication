@@ -1,3 +1,8 @@
+.env
+coverage
+.vscode
+node_modules
+package-lock.json
 # Build and Release Folders
 bin-debug/
 bin-release/
