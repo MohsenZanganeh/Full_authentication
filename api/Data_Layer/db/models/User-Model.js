@@ -63,6 +63,10 @@ module.exports = (sequelize, DataTypes) => {
     version: true,
     paranoid:true
   });
+  User.associate = function (models) {
+    models.User.hasMany(models.User_Password)
+    models.User_Password.belongsTo(models.User)
+  };
   User.prototype.JsonUser=function(token=""){
    return({
     flname:this.flname,
