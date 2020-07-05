@@ -1,3 +1,4 @@
+let { message } = require("../../../View-Layer/index")
 class Generic_Repository {
     constructor(_model) {
         this.model = _model;
@@ -9,7 +10,8 @@ class Generic_Repository {
             return result
         }
         catch (err) {
-           //return error
+            console.log("Insert->",err)
+            return message.Insert
         }
     }
 
@@ -20,7 +22,8 @@ class Generic_Repository {
             return result
         }
         catch (err) {
-           //return error
+            console.log(`Destroy->${err}`)
+            return message.Delete
         }
     }
 
@@ -31,7 +34,8 @@ class Generic_Repository {
             return result;
         }
         catch (err) {
-            //return error
+            console.log(`Update->${err}`)
+            return message.Update
         }
     }
     //generic findAll ->any Model Can use this
@@ -42,11 +46,12 @@ class Generic_Repository {
                 return result
             }
             else {
-               //return error
+                return message.findNoOne
             }
         }
         catch (err) {
-            //return error
+            console.log(`findAll->${err}`)
+            return message.find
         }
     }
      //generic findOneByid ->any Model Can use this
@@ -57,11 +62,12 @@ class Generic_Repository {
                 return result
             }
             else {
-               //return error
+                return message.findNoOne
             }
         }
         catch (err) {
-           //return error
+            console.log(`findOneByid->${err}`)
+            return message.find
         }
     }
     //generic findOneByUUID ->any Model Can use this
@@ -71,7 +77,8 @@ class Generic_Repository {
             return result
         }
         catch (err) {
-            //return error
+            console.log(`findOneByUUID->${err}`)
+            return message.find
         }
     }
 }
