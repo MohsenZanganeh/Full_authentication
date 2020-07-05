@@ -21,5 +21,11 @@ class Utility_Context {
         return this.user_password
     }
 
+    async Transaction(func) {
+        await this.db.sequelize.transaction(async () => {
+                await func()
+        })
+
+    }
 }
 module.exports = new Utility_Context
