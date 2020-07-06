@@ -1,6 +1,6 @@
 module.exports = {
     HaveError(Data){
-        if(Data.hasOwnProperty("Error")||Data==0){
+        if(Data.hasOwnProperty("Error")||Data==null){
             return true
         }
     },
