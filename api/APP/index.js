@@ -1,6 +1,6 @@
 let express=require("express")
 let http=require("http")
-let db=require("../Data-Layer/db/Models/index")
+let db=require("../Data_Layer/db/models/index")
 let body_parser=require("body-parser")
 let app=express()
 
@@ -26,7 +26,7 @@ class Application{
         app.get("/",(req,res)=>{
             res.send("Hello")
         })
-        
+        app.use(require("./loader-Route"))
         console.log(`Setup Route SeccussFully`)
     }
     StupServer(){
