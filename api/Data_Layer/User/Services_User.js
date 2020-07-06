@@ -8,7 +8,7 @@ class Services_User {
             if (User) {
                 User.User_Password = User.User_Passwords[0].get()
                 delete User.User_Passwords
-                //return checkpassword
+               //return checkpassword
             }
         }).catch(() => {
             message.SetMessage(message.Not_Verify_Email)
