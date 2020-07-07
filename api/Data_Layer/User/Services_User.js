@@ -17,7 +17,7 @@ class Services_User {
             if (message.HaveError(User)) {
                 throw new Error();
             }
-
+            this.SendEmail_Verifycation(User)
             message.SetMessage(User.JsonUser());
         }).catch(() => {
             message.SetMessage(message.Not_Verify_Email)
@@ -40,7 +40,15 @@ class Services_User {
         })
         return message.GetMessage();
     }
-
+    async SendEmail_Verifycation(User) {
+        let Token = jwt_service().CreatToken(User.JsonUserWithCode())
+        let Link = Generator.generateLinkVerifying(Token)
+        let email = await SendEmail().sendEmail(User.email, Link)
+        if (message.HaveError(email)) {
+            throw new Error();
+        }
+        return true;
+    }
     async is_currect_Password(User, Data) {
         if (await argon_service().verifyhashing(Data.password, User.Password)) {
             return User;
