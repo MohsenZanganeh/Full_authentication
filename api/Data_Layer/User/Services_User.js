@@ -5,6 +5,10 @@ const moment = require("moment")
 class Services_User {
     async Register_User(Data) {
         await Utility_Context.Transaction(async () => {
+            let User = await Utility_Context.User().Is_Exist_User(Data.email)
+            if (message.HaveError(!User)) {
+              return false //if Exist User->return false->so User is register
+            }
             Data.User_Passwords = [{ password: await argon_service.hashingpassword(Data.password) }]
             Data.activationEmailExpiresAt = moment().add(30, "m")
             Data.activationEmailExpiresResend = moment().add(10, "s")
@@ -45,9 +49,8 @@ class Services_User {
         let Link = Generator.generateLinkVerifying(Token)
         let email = await SendEmail().sendEmail(User.email, Link)
         if (message.HaveError(email)) {
-            throw new Error();
+            message.SetMessage(message.Not_Verify_Email)
         }
-        return true;
     }
     async is_currect_Password(User, Data) {
         if (await argon_service().verifyhashing(Data.password, User.Password)) {
