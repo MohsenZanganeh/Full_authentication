@@ -1,11 +1,11 @@
 let Utility_Context = require("../db/Context/Utility-Context")
 let { argon_service } = require("../../Security_Layer/index")
 let { message } = require("../../View_Layer/index")
-const { user } = require("../db/Context/Utility-Context")
+const moment = require("moment")
 class Services_User {
     async Register_User(Data) {
         await Utility_Context.Transaction(async () => {
-            Data.User_Passwords = [{ password: await argon_service().hashingpassword(Data.password) }]
+            Data.User_Passwords = [{ password: await argon_service.hashingpassword(Data.password) }]
             Data.activationEmailExpiresAt = moment().add(30, "m")
             Data.activationEmailExpiresResend = moment().add(10, "s")
             Data.activationCode = Generator.generateActivationCode();
