@@ -1,6 +1,6 @@
 let Utility_Context = require("../db/Context/Utility-Context")
-let { argon_service } = require("../../Security-Layer/index")
-let { message } = require("../../View-Layer/index")
+let { argon_service } = require("../../Security_Layer/index")
+let { message } = require("../../View_Layer/index")
 const { user } = require("../db/Context/Utility-Context")
 class Services_User {
     async Register_User(Data) {

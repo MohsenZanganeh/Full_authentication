@@ -1,4 +1,4 @@
-let { message } = require("../../../View-Layer/index")
+let { message } = require("../../../View_Layer/index")
 class Generic_Repository {
     constructor(_model) {
         this.model = _model;
