@@ -1,14 +1,29 @@
 let joi = require("joi")
+let { message } = require("../../View-Layer/index")
+let Utility_Context = require("../db/Context/Utility-Context")
 class Validator_User {
+    async Register_User(req, res) {
+        const Register_schema = joi.object({
+            email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+            flname: joi.string().empty(),
+            password: joi.string().empty(),
+            confrimpassword: joi.ref('password'),
+
+        })
+
+        let result = this.Validate(req, res, Register_schema)
+
+        return result
+
+    }
     async Login_User(req, res) {
         let Login_schema = joi.object({
             email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
             password: joi.string().empty()
         })
         let result = this.Validate(req, res, Login_schema)
-        if (result) {
-            return result
-        }
+
+        return result
     }
 
     Validate(req, res, schema) {
