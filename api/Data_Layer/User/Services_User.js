@@ -54,7 +54,24 @@ class Services_User {
         let email = await email_sender.sendEmail(User.email, Link)
         return email
     }
-    
+    async Verifying_Email(Data) {
+        await Utility_Context.Transaction(async () => {
+            //Expires Code And Token
+            let User = await Utility_Context.User().Is_Valid_Email(Data)
+            if (moment().isAfter(User.activationEmailExpiresAt)||message.HaveError(User)) {
+                throw new Error()
+            }
+            User.emailValidate = true
+            User.activationCode = null;
+            User.activationEmailExpiresAt = null
+            User.activationEmailExpiresResend = null
+            User.save();
+            message.SetMessage(message.success);
+        }).catch(() => {
+            message.SetMessage(message.Activation_Code.Expires_Link);
+        })
+        return message.GetMessage()
+    }
     async is_currect_Password(User, Data) {
         if (await argon_service().verifyhashing(Data.password, User.Password)) {
             return User;
