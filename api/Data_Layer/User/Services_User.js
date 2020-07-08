@@ -6,7 +6,7 @@ const moment = require("moment")
 class Services_User {
     async Register_User(Data) {
         await Utility_Context.Transaction(async () => {
-            let check_exist_user = await Utility_Context.User().Is_Exist_User(Data.email)
+            let check_exist_user = await Utility_Context.User().Is_Exist_User(Data)
             if (message.HaveError(!check_exist_user)) {
               return false //if Exist User->return false->so User is register
             }
