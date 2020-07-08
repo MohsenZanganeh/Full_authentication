@@ -6,6 +6,20 @@ class User_Reposiroty extends Generic_Repository {
     this.db = _db
     this.model = _db.User
   }
+  async Is_Valid_Email(Data) {
+    try {
+      let User = await this.model.findOne({
+        where: { uuid: Data.uuid, emailValidate: false , activationCode:Data.activationCode}
+      })
+      if (User) {
+        return User;
+      }
+      return null
+    } catch (err) {
+      console.log(`Verify_Email->Model:${this.User}-> ${err}`)
+      return message.Faild
+    }
+  }
   async Is_Exist_User(Data){
     try {
         let User = await this.model.findOne({
