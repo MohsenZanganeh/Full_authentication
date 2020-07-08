@@ -3,6 +3,7 @@ coverage
 .vscode
 node_modules
 package-lock.json
+config/email.json
 # Build and Release Folders
 bin-debug/
 bin-release/
