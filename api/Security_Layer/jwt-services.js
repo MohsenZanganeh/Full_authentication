@@ -17,10 +17,10 @@ class jwt_services {
                 return decode
        }
     VerifyToken(req) {        
-        let token = GetTokenFromUrl(req)
+        let token = this.GetTokenFromUrl(req)
         if (token) {
             let decode = jwt.verify(token, process.env.Secret)
-            return CheckExpiresToken(decode)
+            return this.CheckExpiresToken(decode)
         }
           return false
      }
