@@ -6,5 +6,8 @@ module.exports={
             characters:'1234567890'
         })
         return code
-    }
+    },
+    generateLinkVerifying(Token){
+        return `${process.env.host}/user/verify-email?token=${Token}`
+    },
 }
