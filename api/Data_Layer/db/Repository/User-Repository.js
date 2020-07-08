@@ -15,7 +15,7 @@ class User_Reposiroty extends Generic_Repository {
         return User == null ? null : User
 
       } catch (err) {
-        logger.error(`Is_Exist_User->Model:User-> ${err}`)
+        console.log(`Is_Exist_User->Model:User-> ${err}`)
         return message.Faild
       }
   }
