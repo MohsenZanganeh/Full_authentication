@@ -1,4 +1,6 @@
 let joi = require("joi")
+let { message } = require("../../View-Layer/index")
+let {jwt_service}=require("../../Security-Layer/index")
 class Validator_User {
     async Register_User(req, res) {
         const Register_schema = joi.object({
@@ -23,7 +25,14 @@ class Validator_User {
 
         return result
     }
-
+    async Verifying_Email(req, res) {
+        let User=await jwt_service().VerifyToken(req)
+        if (User) {
+            return User
+        } else {
+            res.send(message.Activation_Code.Expires_Link);
+        }
+}
     Validate(req, res, schema) {
         var _value;
         joi.validate(req.body, schema, (err, value) => {
