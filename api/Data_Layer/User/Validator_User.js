@@ -1,6 +1,6 @@
 let joi = require("joi")
-let { message } = require("../../View-Layer/index")
-let {jwt_service}=require("../../Security-Layer/index")
+let { message } = require("../../View_Layer/index")
+let {jwt_service}=require("../../Security_Layer/index")
 class Validator_User {
     async Register_User(req, res) {
         const Register_schema = joi.object({
