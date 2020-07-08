@@ -1,6 +1,6 @@
 "use strict";
 const nodemailer = require("nodemailer");
-let {message}=require("../View-Layer/index")
+let {message}=require("../View_Layer/index")
 let config=require("../../config/email.json")
 class SendEmail {
     transporter() {
