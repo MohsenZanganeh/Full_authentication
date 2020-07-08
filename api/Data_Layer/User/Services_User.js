@@ -1,5 +1,5 @@
 let Utility_Context = require("../db/Context/Utility-Context")
-let { argon_service } = require("../../Security_Layer/index")
+let { argon_service,email_sender,jwt_service } = require("../../Security_Layer/index")
 let { message } = require("../../View_Layer/index")
 const moment = require("moment")
 class Services_User {
@@ -21,7 +21,10 @@ class Services_User {
             if (message.HaveError(User)) {
                 throw new Error();
             }
-            this.SendEmail_Verifycation(User)
+           let email = this.SendEmail_Verifycation(User)
+            if (message.HaveError(email)) {
+                throw new Error();
+            }
             message.SetMessage(User.JsonUser());
         }).catch(() => {
             message.SetMessage(message.Not_Verify_Email)
@@ -47,10 +50,8 @@ class Services_User {
     async SendEmail_Verifycation(User) {
         let Token = jwt_service().CreatToken(User.JsonUserWithCode())
         let Link = Generator.generateLinkVerifying(Token)
-        let email = await SendEmail().sendEmail(User.email, Link)
-        if (message.HaveError(email)) {
-            message.SetMessage(message.Not_Verify_Email)
-        }
+        let email = await email_sender.sendEmail(User.email, Link)
+        return email
     }
     
     async is_currect_Password(User, Data) {
