@@ -49,7 +49,7 @@ class Services_User {
         return message.GetMessage();
     }
     async SendEmail_Verifycation(User) {
-        let Token = jwt_service().CreatToken(User.JsonUserWithCode())
+        let Token = jwt_service.CreatToken(User.JsonUserWithCode())
         let Link = Generator.generateLinkVerifying(Token)
         let email = await email_sender.sendEmail(User.email, Link)
         return email
