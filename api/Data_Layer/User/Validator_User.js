@@ -26,7 +26,7 @@ class Validator_User {
         return result
     }
     async Verifying_Email(req, res) {
-        let User=await jwt_service().VerifyToken(req)
+        let User=await jwt_service.VerifyToken(req)
         if (User) {
             return User
         } else {
