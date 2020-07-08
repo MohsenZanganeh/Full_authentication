@@ -1,3 +1,5 @@
+let moment=require("moment")
+let jwt=require("jsonwebtoken")
 class jwt_services {
      CreatToken(Data) {
         Data.expLink = moment().add(30, "m").unix()
