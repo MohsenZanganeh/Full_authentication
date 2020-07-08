@@ -5,8 +5,8 @@ const moment = require("moment")
 class Services_User {
     async Register_User(Data) {
         await Utility_Context.Transaction(async () => {
-            let User = await Utility_Context.User().Is_Exist_User(Data.email)
-            if (message.HaveError(!User)) {
+            let check_exist_user = await Utility_Context.User().Is_Exist_User(Data.email)
+            if (message.HaveError(!check_exist_user)) {
               return false //if Exist User->return false->so User is register
             }
             Data.User_Passwords = [{ password: await argon_service.hashingpassword(Data.password) }]
@@ -52,6 +52,7 @@ class Services_User {
             message.SetMessage(message.Not_Verify_Email)
         }
     }
+    
     async is_currect_Password(User, Data) {
         if (await argon_service().verifyhashing(Data.password, User.Password)) {
             return User;
