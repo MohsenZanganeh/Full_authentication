@@ -36,24 +36,24 @@ class Services_User {
         await Utility_Context.Transaction(async () => {
             let User = await Utility_Context.User().Is_Exist_User(Data)
             if (User) {
-                User.Password = User.User_Passwords[0].get()
+                User.Password = User.User_Passwords[0].get().password
                 delete User.User_Passwords
-                message.SetMessage(is_currect_Password(User, Data))
+                message.SetMessage(this.is_currect_Password(User, Data))
             }
             else {
-                message.SetMessage(message.Wrong_Username_Password)
+                throw new Error();
             }
-        }).catch(() => {
-            message.SetMessage(message.Not_Verify_Email)
+             this.check_emailValidate(User)
+             let Token = jwt_service.CreatToken(User.JsonUser())
+             message.SetMessage(User.JsonUser(Token));
+            
+        }).catch((err) => {
+            console.log(err)
+            message.SetMessage(message.Wrong_Username_Password)
         })
         return message.GetMessage();
     }
-    async SendEmail_Verifycation(User) {
-        let Token = jwt_service.CreatToken(User)
-        let Link = Generator.generateLinkVerifying(Token)
-        let email = await email_sender.sendEmail(User.email, Link)
-        return email
-    }
+    
     async Verifying_Email(Data) {
         await Utility_Context.Transaction(async () => {
             //Expires Code And Token
@@ -87,14 +87,24 @@ class Services_User {
                  throw new Error()
              }
              message.SetMessage(message.success)
-         }).catch((err) => {
-             console.log(err)
+         }).catch(() => {
              message.SetMessage(message.Activation_Code.Resend_Code);
          })
          return message.GetMessage()
      }
+     check_emailValidate(User){
+        if (message.HaveError(User.emailValidate)) {
+            new Error(message.Not_Verify_Email);
+        }
+     }
+     async SendEmail_Verifycation(User) {
+        let Token = jwt_service.CreatToken(User)
+        let Link = Generator.generateLinkVerifying(Token)
+        let email = await email_sender.sendEmail(User.email, Link)
+        return email
+    }
     async is_currect_Password(User, Data) {
-        if (await argon_service().verifyhashing(Data.password, User.Password)) {
+        if (await argon_service.verifyhashing(Data.password, User.Password)) {
             return User;
         }
         return null;
