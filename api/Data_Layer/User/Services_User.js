@@ -22,7 +22,7 @@ class Services_User {
             if (message.HaveError(User)) {
                 throw new Error();
             }
-           let email = this.SendEmail_Verifycation(User)
+           let email = this.SendEmail_Verifycation(User.JsonUserWithCode())
             if (message.HaveError(email)) {
                 throw new Error();
             }
@@ -49,7 +49,7 @@ class Services_User {
         return message.GetMessage();
     }
     async SendEmail_Verifycation(User) {
-        let Token = jwt_service.CreatToken(User.JsonUserWithCode())
+        let Token = jwt_service.CreatToken(User)
         let Link = Generator.generateLinkVerifying(Token)
         let email = await email_sender.sendEmail(User.email, Link)
         return email
@@ -72,6 +72,26 @@ class Services_User {
         })
         return message.GetMessage()
     }
+    async Resend_Email(Data) {
+        await Utility_Context.Transaction(async () => {
+             let User = await Utility_Context.User().Is_Exist_Email(Data)
+             if (message.HaveError(User) || moment().isBefore(User.activationEmailExpiresResend)) {
+                 throw new Error();
+             }
+             User.activationCode = Generator.generateActivationCode();
+             User.activationEmailExpiresAt = moment().add(30, "m")
+             User.activationEmailExpiresResend = moment().add(10, "s")
+             User.save();
+             let email = await SendEmail_Verifycation(User.JsonUser())
+             if (!email) {
+                 throw new Error()
+             }
+             message.SetMessage(message.success)
+         }).catch(() => {
+             message.SetMessage(message.Activation_Code.Resend_Code);
+         })
+         return message.GetMessage()
+     }
     async is_currect_Password(User, Data) {
         if (await argon_service().verifyhashing(Data.password, User.Password)) {
             return User;
