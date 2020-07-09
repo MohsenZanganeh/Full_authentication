@@ -5,4 +5,6 @@ Router.post("/register-user",Controller_User.Register_User)
 Router.get("/login-user",Controller_User.Login_User)
 Router.get("/verify-email",Controller_User.Verifying_Email)
 Router.get("/resend-email",Controller_User.Resend_Email)
+
+Router.get("/get-user",jwt_service.Authenticat,(req,res)=>{res.send("Yes your verifying")})
 module.exports=Router
