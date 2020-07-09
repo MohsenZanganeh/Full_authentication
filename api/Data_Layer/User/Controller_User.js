@@ -15,12 +15,19 @@ class Controller_User {
       res.send(User)
     }
   }
-  async Verifying_Email(req,res) {
-    let result =await Validator_User.Verifying_Email(req,res)
-    if(result){
+  async Verifying_Email(req, res) {
+    let result = await Validator_User.Verifying_Email(req, res)
+    if (result) {
       let User = await Service_User.Verifying_Email(result)
       res.send(User)
-    } 
- }
+    }
+  }
+  async Resend_Email(req, res) {
+    let result = await Validator_User.Resend_Email(req, res)
+    if (result) {
+      let User = await Service_User.Resend_Email(result)
+      res.send(User)
+    }
+  }
 }
 module.exports = new Controller_User
