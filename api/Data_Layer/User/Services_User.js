@@ -74,7 +74,7 @@ class Services_User {
     }
     async Resend_Email(Data) {
         await Utility_Context.Transaction(async () => {
-             let User = await Utility_Context.User().Is_Exist_Email(Data)
+             let User = await Utility_Context.User().Is_Exist_User(Data)
              if (message.HaveError(User) || moment().isBefore(User.activationEmailExpiresResend)) {
                  throw new Error();
              }
@@ -82,12 +82,13 @@ class Services_User {
              User.activationEmailExpiresAt = moment().add(30, "m")
              User.activationEmailExpiresResend = moment().add(10, "s")
              User.save();
-             let email = await SendEmail_Verifycation(User.JsonUser())
+             let email = await this.SendEmail_Verifycation(User.JsonUser())
              if (!email) {
                  throw new Error()
              }
              message.SetMessage(message.success)
-         }).catch(() => {
+         }).catch((err) => {
+             console.log(err)
              message.SetMessage(message.Activation_Code.Resend_Code);
          })
          return message.GetMessage()
