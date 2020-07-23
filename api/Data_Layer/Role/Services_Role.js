@@ -2,7 +2,7 @@ let Utility_Context = require("../db/Context/Utility-Context")
 let {Generator}=require("../../Utility_Layer/index")
 const message = require("../../View_Layer/message")
 class Services_Role{
-    insert_Role(Data){
+   async insert_Role(Data){
         await Utility_Context.Transaction(async () => {
             
             Data.Permission = [Data.Permission]
