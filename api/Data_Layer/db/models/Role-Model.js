@@ -22,5 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     version: true,
     paranoid:true
   });
+  Role.associate = function (models) {
+    models.Role.hasMany(models.Permission)
+    models.Permission.belongsTo(models.Role)
+  };
   return Role;
 }

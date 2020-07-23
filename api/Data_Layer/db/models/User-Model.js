@@ -56,8 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     passwordResetCodeExpiresAt: {
       type: DataTypes.DATE,
-      allowNull: true,
-      field: 'can_not_login_until'
+      allowNull: true
     }
   }, {
     version: true,

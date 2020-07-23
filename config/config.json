@@ -5,7 +5,7 @@
     "database": "database_Login_test",
     "host": "localhost",
     "dialect": "postgres",
-    "operatorsAliases": false,
+    "operatorsAliases": true,
     "pool": {
       "max": 5,
       "min": 0,
