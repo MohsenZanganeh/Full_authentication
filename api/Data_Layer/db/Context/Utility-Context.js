@@ -20,6 +20,20 @@ class Utility_Context {
         }
         return this.user_password
     }
+    Role() {
+        if (!this.Role) {
+            this.Role = new Generic_Repository(this.db)
+            return this.Role
+        }
+        return this.Role
+    }
+    Permission() {
+        if (!this.Permission) {
+            this.Permission = new Generic_Repository(this.db)
+            return this.Permission
+        }
+        return this.Permission
+    }
 
     async Transaction(func) {
         await this.db.sequelize.transaction(async () => {
