@@ -3,20 +3,18 @@ let {Generator}=require("../../Utility_Layer/index")
 const message = require("../../View_Layer/message")
 class Services_Role{
    async insert_Role(Data){
-        //await Utility_Context.Transaction(async () => {
+        await Utility_Context.Transaction(async () => {
             
             Data.Permission = [Data.Permission]
             //Property User 
-            console.log("Data:",Data)
             let Role = await Utility_Context.Role().Insert(Data, {
                 include: [await Utility_Context.db.Permission]
             })
-            console.log("Role:",Role)
          return Role;
-        // }).catch((err) => {
-        //     message.SetMessage(err)
-        // })
-        // return message.GetMessage();
+         }).catch((err) => {
+             message.SetMessage(err)
+         })
+         return message.GetMessage();
     }
 }
 

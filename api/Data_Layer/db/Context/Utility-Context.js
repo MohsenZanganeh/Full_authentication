@@ -15,24 +15,24 @@ class Utility_Context {
 
     User_Password() {
         if (!this.user_password) {
-            this.user_password = new Generic_Repository(this.db)
+            this.user_password = new Generic_Repository(this.db.User_Password)
             return this.user_password
         }
         return this.user_password
     }
     Role() {
-        if (!this.Role) {
-            this.Role = new Generic_Repository(this.db)
-            return this.Role
+        if (!this.role) {
+            this.role = new Generic_Repository(this.db.Role)
+            return this.role
         }
-        return this.Role
+        return this.role
     }
     Permission() {
-        if (!this.Permission) {
-            this.Permission = new Generic_Repository(this.db)
-            return this.Permission
+        if (!this.permission) {
+            this.permission = new Generic_Repository(this.db.Permission)
+            return this.permission
         }
-        return this.Permission
+        return this.permission
     }
 
     async Transaction(func) {
