@@ -1,14 +1,20 @@
-{
-    "Update_User":{
-        "code":"0001",
-        "name":"Update_User"
-    },
-    "Delete_User":{
-        "code":"0002",
-        "name":"Delete_User"
-    },
-    "Get_All_User":{
-        "code":"0003",
-        "name":"Get_All_User"
-    }
-}
+[
+    [
+        {
+            "name": "Update_User",
+            "permission_code": "0001"
+        }
+    ],
+    [
+        {
+            "name": "Delete_User",
+            "permission_code": "0002"
+        }
+    ],
+    [
+        {
+            "name": "Get_All_User",
+            "permission_code": "0003"
+        }
+    ]
+]

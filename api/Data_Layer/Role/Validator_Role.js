@@ -1,4 +1,5 @@
 let joi = require("joi")
+let Permission=require("../../Utility_Layer/Permission")
 let { message } = require("../../View_Layer/index")
 class Validator_Role {
     async Insert_Role(req, res) {
@@ -16,8 +17,9 @@ class Validator_Role {
         })
 
         let result = this.Validate(req, res, Insert_schema)
-
-        return result
+       if(Permission.Is_Exist_Permission(result.Permission)){
+          return result
+       }
 
     }
    
