@@ -1,6 +1,7 @@
 let _db = require("../Models/index")
 let Generic_Repository = require("../Repository/Generice-Repository")
 let User = require("../Repository/User-Repository")
+let Role = require("../Repository/Role-Repository")
 class Utility_Context {
     constructor() {
         this.db = _db
@@ -22,7 +23,7 @@ class Utility_Context {
     }
     Role() {
         if (!this.role) {
-            this.role = new Generic_Repository(this.db.Role)
+            this.role = new Role(this.db)
             return this.role
         }
         return this.role
