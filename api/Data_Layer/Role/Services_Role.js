@@ -13,7 +13,7 @@ class Services_Role{
             let Role = await Utility_Context.Role().Insert(Data, {
                 include: [await Utility_Context.db.Permission]
             })
-         return Role;
+         message.SetMessage(Role);
          }).catch((err) => {
              message.SetMessage(err)
          })

@@ -21,7 +21,7 @@ class Validator_Role {
           return result
        }
        else{
-           return message.Role.IsExist_Permission
+           res.send(message.Role.IsExist_Permission)
        }
 
     }
