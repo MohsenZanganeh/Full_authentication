@@ -38,6 +38,12 @@ module.exports = {
             status: false
         }
     },
+    Role: {
+        IsExist_Permission: {
+            Error: "Your Permission not define",
+            status: false
+        }
+    },
     Login: {
         Wrong_Username_Password: {
             Error: "The username and password are incorrect",
