@@ -4,9 +4,8 @@ const message = require("../../View_Layer/message")
 class Services_Role{
    async insert_Role(Data){
         await Utility_Context.Transaction(async () => {
-            
-            Data.Permission = [Data.Permission]
-            //Property User 
+            //Data.Permission most be A Array list
+            Data.Permissions =Data.Permission
             let Role = await Utility_Context.Role().Insert(Data, {
                 include: [await Utility_Context.db.Permission]
             })
