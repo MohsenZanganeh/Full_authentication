@@ -42,6 +42,10 @@ module.exports = {
         IsExist_Permission: {
             Error: "Your Permission not define",
             status: false
+        },
+        Not_Have_Permission: {
+            Error: "you not have Permission ",
+            status: false
         }
     },
     Login: {
