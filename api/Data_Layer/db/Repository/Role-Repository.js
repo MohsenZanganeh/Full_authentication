@@ -18,13 +18,13 @@ class Role_Reposiroty extends Generic_Repository {
         return message.Faild
       }
   }
-  async Is_Exist_Permission(Data){
+  async Is_Exist_Permission(UserId,permission_code){
     try {
         let Role = await this.model.findOne({
-            where: { UserId:Data.UserId },
+            where: { UserId:UserId },
             include:{
               model:this.db.Permission,
-              where:{permission_code:Data.permission_code}
+              where:{permission_code:permission_code}
             }
           },)
         return Role == null ? null : Role
