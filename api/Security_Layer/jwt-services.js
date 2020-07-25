@@ -45,6 +45,10 @@ class jwt_services {
  async check_Have_Permission(Data){
    try{
      let Role=await Utility_Context.Role().Is_Exist_Permission(Data)
+     if (!message.HaveError(Role)) {
+      return Role;
+    }
+    throw new Error()
    }catch(err){
      res.send(message.Not_Authenticat)
    }
