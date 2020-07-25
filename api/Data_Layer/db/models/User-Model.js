@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = function (models) {
     //associate User And Role
-    models.User.hasMany(models.Role)
+    models.User.belongsTo(models.Role)
     //associate User And User_Password
     models.User.hasMany(models.User_Password)
     models.User_Password.belongsTo(models.User)
