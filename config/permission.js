@@ -10,6 +10,10 @@ module.exports={
     Get_All_User:{
         name: "Get_All_User",
         permission_code: "0003"
+    },
+    Get_All_Product:{
+        name: "Get_All_Product",
+        permission_code: "0004"
     }
 }
        
