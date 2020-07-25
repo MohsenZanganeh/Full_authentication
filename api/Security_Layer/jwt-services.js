@@ -26,7 +26,7 @@ class jwt_services {
     }
     return false
   }
-  async Authenticat(req, res, next) {
+  async Authenticat(req, res, next,permission) {
     try {
       let decode = this.VerifyToken(req)
       if (!decode == false) {
@@ -34,7 +34,7 @@ class jwt_services {
         if (message.HaveError(User)) {
           throw new Error()
         }
-        let Role = check_Have_Permission(User.id, req.permission_code)
+        let Role = check_Have_Permission(User.id,permission)
         if (Role) {
           next();
           return;
@@ -45,9 +45,9 @@ class jwt_services {
       res.send(message.Not_Authenticat)
     }
   }
-  async check_Have_Permission(UserId, permission_code) {
+  async check_Have_Permission(UserId, permission) {
     try {
-      let Role = await Utility_Context.Role().Is_Exist_Permission(UserId, permission_code)
+      let Role = await Utility_Context.Role().Is_Exist_Permission(UserId, permission)
       if (!message.HaveError(Role)) {
         return Role;
       }
