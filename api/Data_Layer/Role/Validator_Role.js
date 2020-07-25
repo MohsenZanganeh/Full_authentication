@@ -1,5 +1,5 @@
 let joi = require("joi")
-let Permission=require("../../Utility_Layer/Permission")
+let {Permission}=require("../../Utility_Layer/index")
 let { message } = require("../../View_Layer/index")
 class Validator_Role {
     async Insert_Role(req, res) {

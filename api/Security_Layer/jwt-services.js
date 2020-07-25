@@ -1,5 +1,6 @@
 let moment = require("moment")
 let jwt = require("jsonwebtoken")
+let {message}=require("../View_Layer/index")
 let Utility_Context = require("../Data_Layer/db/Context/Utility-Context")
 class jwt_services {
   CreatToken(Data) {
@@ -45,7 +46,7 @@ class jwt_services {
    try{
      let Role=await Utility_Context.Role().Is_Exist_Permission(Data)
    }catch(err){
-
+     res.send(message.Not_Authenticat)
    }
   }
 }
