@@ -1,4 +1,4 @@
-let Permission = require("../../config/permission.json")
+let Permission = require("../../config/permission")
 const { valid } = require("joi")
 const { permission } = require("../Data_Layer/db/Context/Utility-Context")
 class Permission_Util {
