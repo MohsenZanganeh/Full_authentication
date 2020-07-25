@@ -9,4 +9,5 @@ Router.get("/verify-email",Controller_User.Verifying_Email)
 Router.get("/resend-email",Controller_User.Resend_Email)
 
 Router.get("/get-user",jwt_service.checkPermission(permission.Get_All_User),(req,res)=>{res.send("Yes your verifying")})
+Router.get("/get-product",jwt_service.checkPermission(permission.Get_All_Product),(req,res)=>{res.send("Yes your verifying")})
 module.exports=Router

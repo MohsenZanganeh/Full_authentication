@@ -34,7 +34,7 @@ class jwt_services {
         if (message.HaveError(User)) {
           throw new Error()
         }
-        let Role = check_Have_Permission(User.id,permission)
+        let Role = this.check_Have_Permission(User.id,permission)
         if (Role) {
           next();
           return;
