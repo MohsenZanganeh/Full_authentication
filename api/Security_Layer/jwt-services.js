@@ -56,5 +56,8 @@ class jwt_services {
       res.send(message.Not_Have_Permission)
     }
   }
+  async checkPermission(Permission){
+    return (req,res,next) => this.Authenticat(req,res,next,Permission)
+  }
 }
 module.exports = new jwt_services
