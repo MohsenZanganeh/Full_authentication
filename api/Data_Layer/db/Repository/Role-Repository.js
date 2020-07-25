@@ -18,6 +18,22 @@ class Role_Reposiroty extends Generic_Repository {
         return message.Faild
       }
   }
+  async Is_Exist_Permission(Data){
+    try {
+        let Role = await this.model.findOne({
+            where: { UserId:Data.UserId },
+            include:{
+              model:this.db.Permission,
+              where:{permission_code:Data.permission_code}
+            }
+          },)
+        return Role == null ? null : Role
+
+      } catch (err) {
+        console.log(`Is_Exist_Role->Model:Role-> ${err}`)
+        return message.Faild
+      }
+  }
 }
 module.exports = Role_Reposiroty
 

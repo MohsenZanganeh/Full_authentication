@@ -41,5 +41,12 @@ class jwt_services {
       res.send(message.Not_Authenticat)
     }
   }
+ async check_Have_Permission(Data){
+   try{
+     let Role=await Utility_Context.Role().Is_Exist_Permission(Data)
+   }catch(err){
+
+   }
+  }
 }
 module.exports = new jwt_services
