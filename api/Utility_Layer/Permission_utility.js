@@ -1,11 +1,9 @@
 let Permission = require("../../config/permission")
-const { valid } = require("joi")
-const { permission } = require("../Data_Layer/db/Context/Utility-Context")
 class Permission_Util {
     get_Permissions_and_Validate(Value) {
-        for (let i = 0; i < Permission.length; i++) {
-            if (Value.name == Permission[i][0].name &&
-                Value.permission_code == Permission[i][0].permission_code) {
+        for (let property in Permission) {
+            if (Value.name == permission[property].name &&
+                Value.permission_code == permission[property].permission_code) {
                 return true
             }
         }
